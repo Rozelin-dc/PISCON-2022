@@ -10,6 +10,7 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"regexp"
 	"strconv"
 	"strings"
 
@@ -284,6 +285,29 @@ func main() {
 	e.Logger.Fatal(e.Start(serverPort))
 }
 
+func isBot(c echo.Context) bool {
+	userAgent := c.Request().UserAgent()
+	botId := []string{
+		`ISUCONbot(-Mobile)?`,
+		`ISUCONbot-Image\/`,
+		`Mediapartners-ISUCON`,
+		`ISUCONCoffee`,
+		`ISUCONFeedSeeker(Beta)?`,
+		`crawler \(https:\/\/isucon\.invalid\/(support\/faq\/|help\/jp\/)`,
+		`isubot`,
+		`Isupider`,
+		`Isupider(-image)?\+`,
+		`(bot|crawler|spider)(?:[-_ .\/;@()]|$)`,
+	}
+	for _, v := range botId {
+		r := regexp.MustCompile(v)
+		if r.Match([]byte(userAgent)) {
+			return true
+		}
+	}
+	return false
+}
+
 func initialize(c echo.Context) error {
 	sqlDir := filepath.Join("..", "mysql", "db")
 	paths := []string{
@@ -314,6 +338,11 @@ func initialize(c echo.Context) error {
 }
 
 func getChairDetail(c echo.Context) error {
+	if isBot(c) {
+		c.Echo().Logger.Errorf("BOT is not unavailable")
+		return c.NoContent(http.StatusServiceUnavailable)
+	}
+
 	id, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
 		c.Echo().Logger.Errorf("Request parameter \"id\" parse error : %v", err)
@@ -339,6 +368,11 @@ func getChairDetail(c echo.Context) error {
 }
 
 func postChair(c echo.Context) error {
+	if isBot(c) {
+		c.Echo().Logger.Errorf("BOT is not unavailable")
+		return c.NoContent(http.StatusServiceUnavailable)
+	}
+
 	header, err := c.FormFile("chairs")
 	if err != nil {
 		c.Logger().Errorf("failed to get form file: %v", err)
@@ -395,6 +429,11 @@ func postChair(c echo.Context) error {
 }
 
 func searchChairs(c echo.Context) error {
+	if isBot(c) {
+		c.Echo().Logger.Errorf("BOT is not unavailable")
+		return c.NoContent(http.StatusServiceUnavailable)
+	}
+
 	conditions := make([]string, 0)
 	params := make([]interface{}, 0)
 
@@ -531,6 +570,11 @@ func searchChairs(c echo.Context) error {
 }
 
 func buyChair(c echo.Context) error {
+	if isBot(c) {
+		c.Echo().Logger.Errorf("BOT is not unavailable")
+		return c.NoContent(http.StatusServiceUnavailable)
+	}
+
 	m := echo.Map{}
 	if err := c.Bind(&m); err != nil {
 		c.Echo().Logger.Infof("post buy chair failed : %v", err)
@@ -587,6 +631,11 @@ func getChairSearchCondition(c echo.Context) error {
 }
 
 func getLowPricedChair(c echo.Context) error {
+	if isBot(c) {
+		c.Echo().Logger.Errorf("BOT is not unavailable")
+		return c.NoContent(http.StatusServiceUnavailable)
+	}
+
 	var chairs []Chair
 	query := `SELECT * FROM chair WHERE stock > 0 ORDER BY price ASC, id ASC LIMIT ?`
 	err := db.Select(&chairs, query, Limit)
@@ -603,6 +652,11 @@ func getLowPricedChair(c echo.Context) error {
 }
 
 func getEstateDetail(c echo.Context) error {
+	if isBot(c) {
+		c.Echo().Logger.Errorf("BOT is not unavailable")
+		return c.NoContent(http.StatusServiceUnavailable)
+	}
+
 	id, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
 		c.Echo().Logger.Infof("Request parameter \"id\" parse error : %v", err)
@@ -637,6 +691,11 @@ func getRange(cond RangeCondition, rangeID string) (*Range, error) {
 }
 
 func postEstate(c echo.Context) error {
+	if isBot(c) {
+		c.Echo().Logger.Errorf("BOT is not unavailable")
+		return c.NoContent(http.StatusServiceUnavailable)
+	}
+
 	header, err := c.FormFile("estates")
 	if err != nil {
 		c.Logger().Errorf("failed to get form file: %v", err)
@@ -692,6 +751,11 @@ func postEstate(c echo.Context) error {
 }
 
 func searchEstates(c echo.Context) error {
+	if isBot(c) {
+		c.Echo().Logger.Errorf("BOT is not unavailable")
+		return c.NoContent(http.StatusServiceUnavailable)
+	}
+
 	conditions := make([]string, 0)
 	params := make([]interface{}, 0)
 
@@ -799,6 +863,11 @@ func searchEstates(c echo.Context) error {
 }
 
 func getLowPricedEstate(c echo.Context) error {
+	if isBot(c) {
+		c.Echo().Logger.Errorf("BOT is not unavailable")
+		return c.NoContent(http.StatusServiceUnavailable)
+	}
+
 	estates := make([]Estate, 0, Limit)
 	query := `SELECT * FROM estate ORDER BY rent ASC, id ASC LIMIT ?`
 	err := db.Select(&estates, query, Limit)
@@ -851,6 +920,11 @@ func searchRecommendedEstateWithChair(c echo.Context) error {
 }
 
 func searchEstateNazotte(c echo.Context) error {
+	if isBot(c) {
+		c.Echo().Logger.Errorf("BOT is not unavailable")
+		return c.NoContent(http.StatusServiceUnavailable)
+	}
+
 	coordinates := Coordinates{}
 	err := c.Bind(&coordinates)
 	if err != nil {
@@ -906,6 +980,11 @@ func searchEstateNazotte(c echo.Context) error {
 }
 
 func postEstateRequestDocument(c echo.Context) error {
+	if isBot(c) {
+		c.Echo().Logger.Errorf("BOT is not unavailable")
+		return c.NoContent(http.StatusServiceUnavailable)
+	}
+
 	m := echo.Map{}
 	if err := c.Bind(&m); err != nil {
 		c.Echo().Logger.Infof("post request document failed : %v", err)
@@ -939,6 +1018,11 @@ func postEstateRequestDocument(c echo.Context) error {
 }
 
 func getEstateSearchCondition(c echo.Context) error {
+	if isBot(c) {
+		c.Echo().Logger.Errorf("BOT is not unavailable")
+		return c.NoContent(http.StatusServiceUnavailable)
+	}
+
 	return c.JSON(http.StatusOK, estateSearchCondition)
 }
 
