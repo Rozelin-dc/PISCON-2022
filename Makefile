@@ -88,11 +88,11 @@ install-tools:
 .PHONY: git-setup
 git-setup:
 	# git用の設定は適宜変更して良い
-	git config --global user.email "isucon@example.com"
-	git config --global user.name "isucon"
+	git config --global user.email "rozelin.dc@gmail.com"
+	git config --global user.name "Rozelin"
 
 	# deploykeyの作成
-	ssh-keygen -t ed25519
+	ssh-keygen
 
 .PHONY: pull
 pull:
