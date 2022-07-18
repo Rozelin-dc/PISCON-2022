@@ -8,7 +8,7 @@ isuumo/%: ## isuumo/${lang} docker-compose up with mysql and api-server frontend
 	docker-compose -f docker-compose/$(shell basename $@).yaml up --build mysql api-server nginx frontend
 
 
-include env.sh
+include ~/env.sh
 # 変数定義 ------------------------
 # SERVER_ID: env.sh内で定義
 
@@ -25,12 +25,6 @@ SYSTEMD_PATH:=/etc/systemd/system
 
 NGINX_LOG:=/var/log/nginx/access.log
 DB_SLOW_LOG:=/var/log/mysql/mariadb-slow.log
-
-MYSQL_HOST:=127.0.0.1
-MYSQL_PORT:=3306
-MYSQL_USER:=isucon
-MYSQL_DBNAME:=isuumo
-MYSQL_PWD:=isucon
 
 # メインで使うコマンド ------------------------
 
