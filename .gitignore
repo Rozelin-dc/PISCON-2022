@@ -12,4 +12,5 @@ fixture/*
 !README.md
 !/mysql/
 !/mysql/**
-
+!/s1/
+!/s1/**
