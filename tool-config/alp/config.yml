@@ -11,3 +11,5 @@ matching_groups:            # array
   - /api/estate/search/condition
   - /api/chair/low_priced
   - /api/chair/buy/[0-9]+
+  - /api/chair/[0-9]+
+  - /api/estate/req_doc/[0-9]+
