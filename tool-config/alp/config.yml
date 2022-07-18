@@ -6,11 +6,12 @@ output: count,5xx,method,uri,min,max,sum,avg,p99                    # string(com
 
 matching_groups:            # array
   - /api/estate/search\?.*
+  - /api/estate/search/condition
   - /api/estate/nazotte
   - /api/estate/[0-9]+
-  - /api/estate/search/condition
+  - /api/estate/req_doc/[0-9]+
   - /api/recommended_estate/[0-9]+
   - /api/chair/low_priced
   - /api/chair/buy/[0-9]+
   - /api/chair/[0-9]+
-  - /api/estate/req_doc/[0-9]+
+  - /api/chair/search\?.*
