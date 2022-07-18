@@ -68,7 +68,7 @@ pprof-check:
 # DBに接続する
 .PHONY: access-db
 access-db:
-	mysql -h $(MYSQL_HOST) -P $(MYSQL_PORT) -u $(MYSQL_USER) -p$(MYSQL_PWD) $(MYSQL_DBNAME)
+	mysql -h $(MYSQL_HOST) -P $(MYSQL_PORT) -u $(MYSQL_USER) -p$(MYSQL_PASS) $(MYSQL_DBNAME)
 
 # 主要コマンドの構成要素 ------------------------
 
