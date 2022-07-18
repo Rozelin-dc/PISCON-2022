@@ -1,0 +1,15 @@
+/*
+/.**
+
+public/*
+fixture/*
+!fixture/.gitkeep
+
+!.gitignore
+!/go/
+!/go/**
+!Makefile
+!README.md
+!/mysql/
+!/mysql/**
+
