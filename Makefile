@@ -43,7 +43,7 @@ deploy-conf: check-server-id deploy-db-conf deploy-nginx-conf deploy-service-fil
 
 # ベンチマークを走らせる直前に実行する
 .PHONY: bench
-bench: check-server-id mv-logs build deploy-conf restart watch-service-log
+bench: check-server-id mv-logs isuumo/go deploy-conf restart watch-service-log
 
 # slow queryを確認する
 .PHONY: slow-query
@@ -181,4 +181,4 @@ endif
 
 .PHONY: watch-service-log
 watch-service-log:
-	sudo journalctl -u $(SERVICE_NAME) -n10 -f
+	sudo journalctl -u $(SERVICE_NAME) -n10 -f > $(BIN_DIR)/$(SERVER_ID)/bench.log
