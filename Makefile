@@ -26,6 +26,11 @@ SYSTEMD_PATH:=/etc/systemd/system
 NGINX_LOG:=/var/log/nginx/access.log
 DB_SLOW_LOG:=/var/log/mysql/mariadb-slow.log
 
+MYSQL_HOST:=127.0.0.1
+MYSQL_PORT:=3306
+MYSQL_USER:=isucon
+MYSQL_DBNAME:=isuumo
+MYSQL_PWD:=isucon
 
 # メインで使うコマンド ------------------------
 
