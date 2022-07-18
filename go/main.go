@@ -21,8 +21,8 @@ import (
 	"github.com/labstack/gommon/log"
 )
 
-const Limit = 20
-const NazotteLimit = 50
+const Limit = 60
+const NazotteLimit = 10
 
 var db *sqlx.DB
 var mySQLConnectionData *MySQLConnectionEnv
