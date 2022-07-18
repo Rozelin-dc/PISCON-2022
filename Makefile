@@ -8,7 +8,7 @@ isuumo/%: ## isuumo/${lang} docker-compose up with mysql and api-server frontend
 	docker-compose -f docker-compose/$(shell basename $@).yaml up --build mysql api-server nginx frontend
 
 
-include ./mysql/db/init.sh
+include env.sh
 # 変数定義 ------------------------
 # SERVER_ID: env.sh内で定義
 
