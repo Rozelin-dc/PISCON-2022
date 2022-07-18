@@ -93,7 +93,7 @@ git-setup:
 	# deploykeyの作成
 	ssh-keygen -t ed25519
 
-.PHONY
+.PHONY: git-pull
 git-pull:
 	git fetch
 	git pull
