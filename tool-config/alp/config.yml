@@ -5,7 +5,7 @@ query_string: true              # boolean
 output: count,5xx,method,uri,min,max,sum,avg,p99                    # string(comma separated)
 
 matching_groups:            # array
-  - /api/estate/search.*
+  - /api/estate/search\?.*
   - /api/estate/nazotte
   - /api/estate/[0-9]+
   - /api/estate/search/condition
