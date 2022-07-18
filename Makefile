@@ -53,7 +53,7 @@ slow-query:
 # alpでアクセスログを確認する
 .PHONY: alp
 alp:
-	sudo alp ltsv --file=$(NGINX_LOG) --config=/home/isucon/tool-config/alp/config.yml
+	sudo alp ltsv --file=$(NGINX_LOG) --config=$(BIN_DIR)/tool-config/alp/config.yml
 
 # pprofで記録する
 .PHONY: pprof-record
@@ -82,7 +82,7 @@ install-tools:
 	# alpのインストール
 	wget https://github.com/tkuchiki/alp/releases/download/v1.0.9/alp_linux_amd64.zip
 	unzip alp_linux_amd64.zip
-	sudo install alp /usr/local/bin/alp
+	sudo install ./alp /usr/local/bin
 	rm alp_linux_amd64.zip alp
 
 .PHONY: git-setup
