@@ -42,7 +42,7 @@ deploy-conf: check-server-id deploy-db-conf deploy-nginx-conf deploy-service-fil
 
 # ベンチマークを走らせる直前に実行する
 .PHONY: bench
-bench: check-server-id mv-logs build deploy-conf restart watch-service-log
+bench: git-pull check-server-id mv-logs build deploy-conf restart watch-service-log
 
 # slow queryを確認する
 .PHONY: slow-query
@@ -92,6 +92,11 @@ git-setup:
 
 	# deploykeyの作成
 	ssh-keygen -t ed25519
+
+.PHONY
+git-pull:
+	git fetch
+	git pull
 
 .PHONY: check-server-id
 check-server-id:
