@@ -14,8 +14,8 @@ include env.sh
 
 # 問題によって変わる変数
 USER:=isucon
-BIN_NAME:=issumo
-BUILD_DIR:=/home/isucon/issumo/webapp/go
+BIN_NAME:=isuumo
+BUILD_DIR:=/home/isucon/isuumo/webapp/go
 SERVICE_NAME:=$(BIN_NAME).go.service
 
 DB_PATH:=/etc/mysql
