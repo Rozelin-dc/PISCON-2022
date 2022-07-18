@@ -14,5 +14,7 @@ fixture/*
 !/mysql/**
 !/s1/
 !/s1/**
+!/s3/
+!/s3/**
 !/tool-config/
 !/tool-config/**
