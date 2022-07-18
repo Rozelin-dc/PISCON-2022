@@ -15,3 +15,4 @@ matching_groups:            # array
   - /api/chair/buy/[0-9]+
   - /api/chair/[0-9]+
   - /api/chair/search\?.*
+  - /images/estate/.+
