@@ -34,7 +34,7 @@ setup: install-tools git-setup
 
 # 設定ファイルなどを取得してgit管理下に配置する
 .PHONY: get-conf
-get-conf: check-server-id get-db-conf get-nginx-conf get-service-file get-envsh
+get-conf: check-server-id dir get-db-conf get-nginx-conf get-service-file get-envsh
 
 # リポジトリ内の設定ファイルをそれぞれ配置する
 .PHONY: deploy-conf
@@ -118,6 +118,22 @@ set-as-s2:
 .PHONY: set-as-s3
 set-as-s3:
 	echo "SERVER_ID=s3" >> ~/env.sh
+
+.PHONY: dir
+dir:
+	mkdir $(SERVER_ID)
+	cd $(SERVER_ID)
+	mkdir etc
+	mkdir mysql
+	mkdir nginx
+	mkdir systemd
+	cd systemd
+	mkdir system
+	cd $(BIN_DIR)/$(SERVER_ID)
+	mkdir home
+	cd home
+	mkdir isucon
+	cd $(BIN_DIR)
 
 .PHONY: get-db-conf
 get-db-conf:
